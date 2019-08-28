@@ -1,0 +1,24 @@
+---
+- name: Install nginx
+  hosts: all
+  #sudo: yes 
+
+  tasks:
+  - name: Install nginx
+    apt:
+      name: nginx
+      state: latest 
+      #notify:
+      #- Start NGinX
+
+  - name: Insert Index Page
+    template:
+      src: index.html
+      dest: /usr/share/nginx/html/index.html
+
+      #handlers:
+  - name: start nginx
+    service:
+      name: nginx
+      state: started
+      #become: yes
